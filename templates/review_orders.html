@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Orders</title>
+</head>
+
+<body>
+    <!-- [{'order_id': 1, 'customer_name': 'mohit', 'dish_ids': ['1', '3'], 'status': 'received'} ]-->
+    <h1>Review Orders</h1>
+    {% for order in orders %}
+    <h3>Order ID: {{ order.order_id }}</h3>
+    <p>Customer Name: {{ order.customer_name }}</p>
+    <p>Status: {{ order.status }}</p>
+    <p>Dishes:</p>
+    <ul>
+        {% for name in order.name %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ul>
+    <p>Total Price: ₹{{ order.total_price }}</p>
+    <hr>
+    {% endfor %}
+     
+    <form class="update-status-form" action="/order/update_status" method="POST">
+        <label for="order_id">Order ID:</label>
+        <input type="text" id="order_id" name="order_id" required><br>
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="received">Received</option>
+            <option value="preparing">Preparing</option>
+            <option value="ready for pickup">Ready for Pickup</option>
+            <option value="delivered">Delivered</option>
+        </select><br>
+        <input type="submit" value="Update">
+    </form>
+    
+</body>
+
+</html>

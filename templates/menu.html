@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Menu</h1>
+<table>
+    <tr>
+        <th>Dish ID</th>
+        <th>Dish Name</th>
+        <th>Price</th>
+        <th>Availability</th>
+        <th>Stock</th>
+    </tr>
+    {% for dish in menu %}
+    <tr>
+        <td>{{ dish['dish_id'] }}</td>
+        <td>{{ dish['dish_name'] }}</td>
+        <td>{{ dish['price'] }}</td>
+        <td>{{ dish['availability'] }}</td>
+        <td>{{ dish['stock'] }}</td>
+        <td><form action="/delete-dish/{{ dish.dish_id }}" method="POST">
+            <button type="submit">Delete</button>
+        </form></td>
+    </tr>
+    {% endfor %}
+</table>
+<!-- <form class="update-status-form" action="/menu/update_stock" method="POST">
+    <label for="order_id">Order ID:</label>
+    <input type="text" id="dish_id" name="dish_id" required><br>
+    <label for="status">Status:</label>
+    <input type="number" id="stock" name="stock" required><br>
+    <br>
+    <input type="submit" value="Update">
+</form> -->
+<a class="place-order-button" href="/take-order">Place a New Order</a>
+    <a class="show-orders-button" href="/review-orders">Show All Orders</a>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add Dish</h1>
+
+    <form method="POST" action="/add-dish" onsubmit="showAlert()">
+        <label for="dish_id">Dish ID:</label>
+        <input type="number" id="dish_id" name="dish_id" required><br><br>
+
+        <label for="dish_name">Dish Name:</label>
+        <input type="text" id="dish_name" name="dish_name" required><br><br>
+
+        <label for="price">Price:</label>
+        <input type="number" step="0.01" id="price" name="price" required><br><br>
+
+        <label for="availability">Availability:</label>
+        <select id="availability" name="availability" required>
+            <option value="true">Available</option>
+            <option value="false">Not Available</option>
+        </select><br><br>
+        
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required><br><br>
+
+        <input type="submit" value="Add Dish">
+    </form>
+</body>
+
+<script>
+    // Function to display an alert message
+    function showAlert() {
+        alert("Dish added successfully!");
+    }
+</script>
+
+</html>

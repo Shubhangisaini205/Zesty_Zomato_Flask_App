@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Order</title>
+</head>
+<body>
+    <h1>Take Order</h1>
+    <form action="/take-order" method="POST">
+      <label for="customer_name">Customer Name:</label>
+      <input type="text" id="customer_name" name="customer_name" required><br><br>
+  
+      <label for="dish_ids">Dishes:</label><br>
+      {% for dish in menu %}
+        {% if dish.stock > 0  %}
+          <input type="checkbox" id="dish_{{ dish.dish_id }}" name="dish_ids" value="{{ dish.dish_id }}">
+          <label for="dish_{{ dish.dish_id }}">{{ dish.dish_name }} -  ₹{{ dish.price }}</label><br>
+        {% endif %}
+      {% endfor %}
+      <br>
+  
+      <button type="submit">Place Order</button>
+    </form>
+  </body>
+
+</html>
