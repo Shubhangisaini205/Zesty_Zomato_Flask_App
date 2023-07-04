@@ -204,7 +204,7 @@ def delete_dish(dish_id):
     save_menu(menu)
 
     # Redirect to the display menu page
-    return redirect('/menu')
+    return redirect('/')
  
 
 @app.route('/order/update_status', methods=['POST'])
@@ -227,25 +227,24 @@ def update_order_status(order_id, status):
             return True
     return False
 
-@app.route('/menu/update_stock', methods=['POST'])
-def update_stock():
-    dish_id = int(request.form['dish_id'])
-    stock = request.form['stock']
-    if update_menu_dish_stock(dish_id, stock):
-        return redirect('/menu')
-    return 'Invalid Dish Id'
-
-def update_menu_dish_stock(dish_id, stock):
+@app.route('/update-stock/<int:dish_id>', methods=['POST'])
+def update_stock(dish_id):
+    # Retrieve the menu data
     menu = load_menu()
-    for item in menu:
-        if item['dish_id'] == dish_id:
-            item['stock'] = stock
 
-            # Save updated orders data using pickle
-            save_menu(item)
+    # Find the dish with the given dish_id
+    for dish in menu:
+        if dish['dish_id'] == dish_id:
+            # Update the stock value
+            dish['stock'] = int(request.form['stock'])
+            break
 
-            return True
-    return False
+    # Save the updated menu data using pickle
+    save_menu(menu)
+
+    # Redirect the staff to the "Display Menu" page
+    return redirect(url_for('display_menu'))
+
 
 
 
