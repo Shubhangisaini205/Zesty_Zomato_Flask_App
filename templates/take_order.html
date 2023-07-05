@@ -67,29 +67,34 @@
             margin-left: 10px;
             color: #333;
         }
-        button[type="submit"] {
+        button[type="submit"],.go_to_menu {
             padding: 10px 20px;
             background-color: #4CAF50;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            text-decoration: none;
         }
 
-        button[type="submit"]:hover {
+        button[type="submit"]:hover,.go_to_menu:hover {
             background-color: #45a049;
         }
+
     </style>
 </head>
 
 <body>
-    <h1>Take Order</h1>
+    <h1>Take orders 👇👇👇</h1>
     <form action="/take-order" method="POST">
         <label for="customer_name">Customer Name:</label>
         <input type="text" id="customer_name" name="customer_name" required>
 
         <label id="dishlabel" for="dish_ids">Dishes:</label>
         <br>
+        {% if menu == []  %}
+        <h3>Dishes are not available!🚫.</h3>
+        {% endif %}
         {% for dish in menu %}
         {% if dish.stock > 0  %}
         <div class="checkbox-container">
@@ -99,7 +104,7 @@
         
         {% endif %}
         {% if dish.stock <= 0  %}
-        <h3>All Dishes are out of Stock🚫.</h3>
+        <h3>{{dish.dish_name}} is out of Stock🚫.</h3>
         {% endif %}
 
         {% endfor %}
@@ -107,7 +112,9 @@
         <br>
 
         <button type="submit">Place Order</button>
+        <a class="go_to_menu" href="/">Go to menu</a>
     </form>
+   
 </body>
 
 </html>
